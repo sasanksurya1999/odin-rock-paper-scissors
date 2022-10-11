@@ -4,51 +4,59 @@ function getComputerChoice(){
 }
 player=0
 computer=0
+count=0
 function playRound(playerSelection, computerSelection) {
     // your code here!
     
     if(playerSelection.toLowerCase()=='rock'){
         if(computerSelection.toLowerCase()=='scissors'){
-            player+=1
+            console.log('You WIN!')
+            player++
         }
         else{
-            computer+=1
+            console.log('YOu Lose!')
+            computer++
         }
     }
     else if(playerSelection.toLowerCase()=='paper'){
         if(computerSelection.toLowerCase()=='rock'){
-            player+=1
+            console.log('You WIN!')
+            player++
         }
         else{
-            computer+=1
+            console.log('YOu Lose!')
+            computer++
         }
     }
     else if(playerSelection.toLowerCase()=='scissors'){
         if(computerSelection.toLowerCase()=='paper'){
-            player+=1
+            console.log('You WIN!')
+            player++
         }
         else{
-            computer+=1
+            console.log('YOu Lose!')
+            computer++
         }
     }
     else{
         return -1
     }
-  }
-
-
-
-function game(){
-    for(let i=0;i<5;i++){
-        let playerSelection=prompt('')
-        let computerSelection=getComputerChoice()
-        if(playRound(playerSelection, computerSelection)==-1){
-            i--
-        }
-        console.log(computerSelection)
-        console.log(player,computer)
+    count++
+    if(count==5){
+        player >computer ? announce('player won the tournament') : player<computer? announce('computer won the tournament'): announce('The tornament ends in a Draw!')
     }
-    
-    player==computer? console.log('Draw') : player>computer? console.log('You Win!') : console.log('You Lose!')
+  }
+const rock=document.querySelector('#rock')
+const paper=document.querySelector('#paper')
+const scissors=document.querySelector('#scissors')
+
+rock.addEventListener('click',()=> playRound(getComputerChoice(),'rock'))
+paper.addEventListener('click',()=> playRound(getComputerChoice(),'paper'))
+scissors.addEventListener('click',()=> playRound(getComputerChoice(),'scissors'))
+
+function announce(winner){
+    const container=document.querySelector('body')
+    const div=document.createElement('div')
+    div.textContent=winner
+    container.appendChild(div)
 }
-game()
