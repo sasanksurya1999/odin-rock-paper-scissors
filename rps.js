@@ -7,8 +7,6 @@ computer = 0;
 count = 5;
 const roundresult = document.querySelector("#round-result");
 function playRound(playerSelection, computerSelection) {
-  // your code here!
-
   if (playerSelection.toLowerCase() == "rock") {
     if (computerSelection.toLowerCase() == "scissors") {
       roundresult.textContent = `You WIN! rounds remaining =${count}`;
