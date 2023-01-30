@@ -4,59 +4,74 @@ function getComputerChoice(){
 }
 player=0
 computer=0
-count=0
+count=5
+const roundresult=document.querySelector('#round-result');
 function playRound(playerSelection, computerSelection) {
     // your code here!
     
     if(playerSelection.toLowerCase()=='rock'){
         if(computerSelection.toLowerCase()=='scissors'){
-            console.log('You WIN!')
+            roundresult.textContent=`You WIN! rounds remaining =${count}`
             player++
         }
         else{
-            console.log('YOu Lose!')
+            roundresult.textContent =`YOu Lose! rounds remaining =${count}`
             computer++
         }
     }
     else if(playerSelection.toLowerCase()=='paper'){
         if(computerSelection.toLowerCase()=='rock'){
-            console.log('You WIN!')
+            roundresult.textContent=`You WIN! rounds remaining =${count}`
             player++
         }
         else{
-            console.log('YOu Lose!')
+            roundresult.textContent =`YOu Lose! rounds remaining =${count}`
             computer++
         }
     }
     else if(playerSelection.toLowerCase()=='scissors'){
         if(computerSelection.toLowerCase()=='paper'){
-            console.log('You WIN!')
+            roundresult.textContent=`You WIN! rounds remaining =${count}`
             player++
         }
         else{
-            console.log('YOu Lose!')
+            roundresult.textContent =`YOu Lose! rounds remaining =${count}`
             computer++
         }
     }
     else{
         return -1
     }
-    count++
-    if(count==5){
+    
+    if(count==0){
         player >computer ? announce('player won the tournament') : player<computer? announce('computer won the tournament'): announce('The tornament ends in a Draw!')
     }
+    count--
   }
 const rock=document.querySelector('#rock')
 const paper=document.querySelector('#paper')
 const scissors=document.querySelector('#scissors')
 
 rock.addEventListener('click',()=> playRound(getComputerChoice(),'rock'))
+rock.addEventListener('mouseover',onHover)
+rock.addEventListener('mouseout',onOut)
 paper.addEventListener('click',()=> playRound(getComputerChoice(),'paper'))
+paper.addEventListener('mouseover',onHover)
+paper.addEventListener('mouseout',onOut)
 scissors.addEventListener('click',()=> playRound(getComputerChoice(),'scissors'))
+scissors.addEventListener('mouseover',onHover)
+scissors.addEventListener('mouseout',onOut)
 
+
+
+function onHover(e){
+    
+    e.target.classList.add('hovered');
+    e.target.style.pointerEvents='pointer'
+}
+function onOut(e){
+    e.target.classList.remove('hovered')
+}
 function announce(winner){
-    const container=document.querySelector('body')
-    const div=document.createElement('div')
-    div.textContent=winner
-    container.appendChild(div)
+    roundresult.textContent=winner
 }
